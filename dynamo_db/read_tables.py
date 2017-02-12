@@ -3,6 +3,7 @@
 import boto3
 
 client = boto3.client('dynamodb')
+dynamodb = boto3.resource('dynamodb')
 
 response = client.list_tables()
 
@@ -18,7 +19,8 @@ print('Scanning values of each Tables : ')
 for table in response['TableNames']:
 	scan_result = client.scan(TableName=table)
 	print(scan_result)
-	
+	print('Item Coutn : {0}'.format(dynamodb.Table(table).item_count))
+
 	for item in scan_result['Items']:
 		print()
 		print(item)
