@@ -26,3 +26,21 @@ if bucket_found:
 	print("Bucket {} successfully deleted! :)".format(bucket_name))
 else:
 	print("Bucket {} NOT found.. Exiting the program.".format(bucket_name))
+
+
+# Make sure empty the bucket before deleting.
+# Possible change.
+
+# for key in bucket.objects.all():
+#		key.delete()
+# bucket.delete()
+
+# Another side tip.
+# -> Deleting all buckets with all data. (bucket nuking? :troll:)
+
+# for bucket in s3.buckets.all():
+#		for key in bucket.objeccts.all():
+#			key.delete()
+#		bucket.delete()
+
+# Use at your own risk :)
