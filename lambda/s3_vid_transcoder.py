@@ -25,10 +25,15 @@ def lambda_handler(event, context):
 	key = event['Records'][0]['s3']['object']['key']
 
 	# Set the Transcoder param values.
-	pipeline_id = '1491359399719-rkun9x' # to-mp4-pipeline
-	output_key_prefix = 'video_output/'
-	preset_id = '1351620000001-000010' # Generic 720p
+	pipeline_id = '1491359399719-rkun9x'
 
+	# to-mp4-pipeline
+	output_key_prefix = 'video_output/'
+
+	# Generic 720p
+	preset_id = '1351620000001-000010' 
+
+	# Input params.
 	params = {
 		'PipelineId' : pipeline_id,
 		'OutputKeyPrefix' : output_key_prefix,
@@ -42,6 +47,9 @@ def lambda_handler(event, context):
 	}
 
 	try:
+		# Creates a job with specified kwargs.
+		# Only problem is that it does not recognize Job failure.
+		# Might need to add SNS topic to elastic transcoder with lambda Trigger.
 		transcode_response = client.create_job(**params)
 		return transcode_response['ResponseMetadata']
 	except Exception as e:
