@@ -9,5 +9,40 @@ import boto3
 
 client = boto3.client('elastictranscoder')
 
+def get_base_name(full_path):
+	return full_path.split('/')[-1].split('.')[0]
+
+def get_output_key(key, ext):
+	return 'tc_' + key + '.' + ext
+
 def lambda_handler(event, context):
-	pass
+	# Print received object.
+	print("Received event: " + json.dumps(event, indent=2))
+
+	# Get key value of S3 object.
+	key = event['Records'][0]['s3']['object']['key']
+
+	# Set the Transcoder param values.
+	pipeline_id = '1491359399719-rkun9x' # to-mp4-pipeline
+	output_key_prefix = 'video_output/'
+	preset_id = '1351620000001-000010' # Generic 720p
+
+	params = {
+		'PipelineId' : pipeline_id,
+		'OutputKeyPrefix' : output_key_prefix,
+		'Input' : {
+			'Key' : key + 'as'
+		},
+		'Output' : {
+			'Key' : get_output_key(get_base_name(key), 'mp4'),
+			'PresetId' : preset_id
+		}
+	}
+
+	try:
+		transcode_response = client.create_job(**params)
+		return transcode_response['ResponseMetadata']
+	except Exception as e:
+		print(e)
+		print('Error!!')
+		raise e
