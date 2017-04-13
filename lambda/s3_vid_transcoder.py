@@ -1,6 +1,8 @@
 '''
 This lambda function will get triggered by
 S3 PUT events with input videos of certain extension
+http://boto3.readthedocs.io/en/latest/reference/services/elastictranscoder.html#ElasticTranscoder.Client.create_job
+
 '''
 from __future__ import print_function
 
@@ -31,7 +33,7 @@ def lambda_handler(event, context):
 		'PipelineId' : pipeline_id,
 		'OutputKeyPrefix' : output_key_prefix,
 		'Input' : {
-			'Key' : key + 'as'
+			'Key' : key
 		},
 		'Output' : {
 			'Key' : get_output_key(get_base_name(key), 'mp4'),
