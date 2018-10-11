@@ -19,4 +19,3 @@ try:
 except Exception as e:
   print(e)
   print('Please try again later.. might be an adding delay.')
-  

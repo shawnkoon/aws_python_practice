@@ -21,7 +21,7 @@ def get_base_name(full_path):
 
 def get_output_key(key, ext):
 	return 'tc_' + key + '.' + ext
-	
+
 def get_prefix(path):
 	split_array = path.split('/')
 	return '/'.join(split_array[0:len(split_array) - 1]) + '/'
@@ -40,7 +40,7 @@ def lambda_handler(event, context):
 	output_key_prefix = get_prefix(key)
 
 	# Generic 720p
-	preset_id = '1351620000001-000010' 
+	preset_id = '1351620000001-000010'
 
 	# Input params.
 	params = {

@@ -31,7 +31,7 @@ def lambda_handler(event, context):
 	output_key_prefix = 'video_output/'
 
 	# Generic 720p
-	preset_id = '1351620000001-000010' 
+	preset_id = '1351620000001-000010'
 
 	# Input params.
 	params = {

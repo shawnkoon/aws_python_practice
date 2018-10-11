@@ -46,7 +46,7 @@ waiter.wait(
 
 print('Table {0} creation completed!\nBye.'.format(tableName))
 
-# This creates a table named users that respectively has the hash and range primary keys id and username. 
+# This creates a table named users that respectively has the hash and range primary keys id and username.
 # This method will return a DynamoDB.Table resource to call additional methods on the created table.
 # src : https://boto3.readthedocs.io/en/latest/guide/dynamodb.html#creating-a-new-table
 
